@@ -35,14 +35,30 @@ function addCol() {
     }
 }
 
+// Function to remove the last row from the grid
+function removeRow() {
+    const gridContainer = document.getElementById('grid-container');
+    const rows = gridContainer.children;
+
+    // Remove the last row if it exists
+    if (rows.length > 0) {
+        // Remove the last row from the grid container
+        gridContainer.removeChild(rows[rows.length - 1]);
+    }
+}
+
 // Event listener for the action menu
 document.getElementById('do-action').addEventListener('click', () => {
+    // action -> value within the dropdown
     const action = document.getElementById('action-menu').value;
     if (action === 'add-row') {
         addRow();
     }
     else if (action === 'add-col') {
         addCol();
+    }
+    else if (action === 'remove-row') {
+        removeRow();
     }
 });
 
