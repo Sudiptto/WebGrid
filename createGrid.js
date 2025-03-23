@@ -17,11 +17,32 @@ function addRow() {
     gridContainer.appendChild(newRow);
 }
 
+// Function to add a column to the grid
+function addCol() {
+    const gridContainer = document.getElementById('grid-container');
+    const rows = gridContainer.children;
+
+    // Add a new cell to each existing row
+    for (let i = 0; i < rows.length; i++) {
+        const cell = document.createElement('div');
+        cell.classList.add('grid-cell');
+        rows[i].appendChild(cell);
+    }
+
+    // If the grid is empty, add a single row with one cell
+    if (rows.length === 0) {
+        addRow();
+    }
+}
+
 // Event listener for the action menu
 document.getElementById('do-action').addEventListener('click', () => {
     const action = document.getElementById('action-menu').value;
     if (action === 'add-row') {
         addRow();
+    }
+    else if (action === 'add-col') {
+        addCol();
     }
 });
 
