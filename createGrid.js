@@ -47,6 +47,20 @@ function removeRow() {
     }
 }
 
+// Function to remove the last column from the grid
+function removeCol() {
+    const gridContainer = document.getElementById('grid-container');
+    const rows = gridContainer.children;
+
+    // Remove the last cell from each row
+    for (let i = 0; i < rows.length; i++) {
+        const cells = rows[i].children;
+        if (cells.length > 0) {
+            rows[i].removeChild(cells[cells.length - 1]);
+        }
+    }
+}
+
 // Event listener for the action menu
 document.getElementById('do-action').addEventListener('click', () => {
     // action -> value within the dropdown
@@ -59,6 +73,9 @@ document.getElementById('do-action').addEventListener('click', () => {
     }
     else if (action === 'remove-row') {
         removeRow();
+    }
+    else if (action === 'remove-col') {
+        removeCol();
     }
 });
 
