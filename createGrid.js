@@ -65,6 +65,23 @@ function removeCol() {
     }
 }
 
+// Function to color all uncolored cells with the selected color
+function colorUncoloredCells() {
+    // Get the grid container and all cells
+    const gridContainer = document.getElementById('grid-container');
+    const cells = gridContainer.getElementsByClassName('grid-cell');
+    const colorPicker = document.getElementById('color-picker');
+    const selectedColor = colorPicker.value;
+
+    // Loop through all cells and color only the uncolored ones (white)
+    for (let i = 0; i < cells.length; i++) {
+        if (!cells[i].style.backgroundColor || cells[i].style.backgroundColor === 'white') {
+            cells[i].style.backgroundColor = selectedColor;
+        }
+    }
+}
+
+
 // Event listener for the action menu
 document.getElementById('do-action').addEventListener('click', () => {
     // action -> value within the dropdown
@@ -80,6 +97,9 @@ document.getElementById('do-action').addEventListener('click', () => {
     }
     else if (action === 'remove-col') {
         removeCol();
+    }
+    else if (action === 'color-uncolored') {
+        colorUncoloredCells(); 
     }
 });
 
