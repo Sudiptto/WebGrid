@@ -60,6 +60,7 @@ function removeCol() {
     for (let i = 0; i < rows.length; i++) {
         const cells = rows[i].children;
         if (cells.length > 0) {
+            // Remove the last cell from the row
             rows[i].removeChild(cells[cells.length - 1]);
         }
     }
@@ -75,12 +76,28 @@ function colorUncoloredCells() {
 
     // Loop through all cells and color only the uncolored ones (white)
     for (let i = 0; i < cells.length; i++) {
-        if (!cells[i].style.backgroundColor || cells[i].style.backgroundColor === 'white') {
+        
+        const cellColor = window.getComputedStyle(cells[i]).backgroundColor;
+        // Check if the cell is uncolored (white) -> use RGB instead of just 'white' -> more accurate
+        if (!cellColor || cellColor === 'rgb(255, 255, 255)') {
             cells[i].style.backgroundColor = selectedColor;
         }
     }
 }
 
+// function to color all cells with selected color
+function colorAllCells() {
+    // Get the grid container and all cells
+    const gridContainer = document.getElementById('grid-container');
+    const cells = gridContainer.getElementsByClassName('grid-cell');
+    const colorPicker = document.getElementById('color-picker');
+    const selectedColor = colorPicker.value;
+
+    // Loop through all cells and color EVERYTHING
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].style.backgroundColor = selectedColor;
+    }
+}
 
 // Event listener for the action menu
 document.getElementById('do-action').addEventListener('click', () => {
@@ -100,6 +117,9 @@ document.getElementById('do-action').addEventListener('click', () => {
     }
     else if (action === 'color-uncolored') {
         colorUncoloredCells(); 
+    }
+    else if (action === 'color-all') {
+        colorAllCells(); 
     }
 });
 
