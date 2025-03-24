@@ -99,6 +99,18 @@ function colorAllCells() {
     }
 }
 
+//function to clear (delete) all the cells
+function clearAllCells() {
+    // Get the grid container and all cells
+    const gridContainer = document.getElementById('grid-container');
+
+    // Remove all rows from the grid container
+    while (gridContainer.firstChild) {
+        // Remove the first child of the grid container (removes everything -> graph like)
+        gridContainer.removeChild(gridContainer.firstChild);
+    }
+}
+
 // Event listener for the action menu
 document.getElementById('do-action').addEventListener('click', () => {
     // action -> value within the dropdown
@@ -120,6 +132,9 @@ document.getElementById('do-action').addEventListener('click', () => {
     }
     else if (action === 'color-all') {
         colorAllCells(); 
+    }
+    else if (action === 'clear-all') {
+        clearAllCells(); 
     }
 });
 
